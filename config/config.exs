@@ -28,3 +28,7 @@ config :phoenix, :json_library, Jason
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
+
+config :myApi, MyApi.Guardian,
+  issuer: "movies_api",
+  secret_key: "NYBtZuS6ntUbabCQTsARd9IjhLb7hWjs8/3VHozM/aYHURZApdX4gXVZwovlZYlC"
