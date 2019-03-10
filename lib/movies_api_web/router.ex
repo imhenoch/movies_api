@@ -24,5 +24,6 @@ defmodule MoviesApiWeb.Router do
     resources "/ratings", RatingController
     resources "/languages", LanguageController
     resources "/genres", GenreController
+    resources "/movies", MovieController
   end
 end
