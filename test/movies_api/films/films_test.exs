@@ -297,4 +297,61 @@ defmodule MoviesApi.FilmsTest do
       assert %Ecto.Changeset{} = Films.change_film_languages(film_languages)
     end
   end
+
+  describe "movie_genres" do
+    alias MoviesApi.Films.MovieGenres
+
+    @valid_attrs %{}
+    @update_attrs %{}
+    @invalid_attrs %{}
+
+    def movie_genres_fixture(attrs \\ %{}) do
+      {:ok, movie_genres} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Films.create_movie_genres()
+
+      movie_genres
+    end
+
+    test "list_movie_genres/0 returns all movie_genres" do
+      movie_genres = movie_genres_fixture()
+      assert Films.list_movie_genres() == [movie_genres]
+    end
+
+    test "get_movie_genres!/1 returns the movie_genres with given id" do
+      movie_genres = movie_genres_fixture()
+      assert Films.get_movie_genres!(movie_genres.id) == movie_genres
+    end
+
+    test "create_movie_genres/1 with valid data creates a movie_genres" do
+      assert {:ok, %MovieGenres{} = movie_genres} = Films.create_movie_genres(@valid_attrs)
+    end
+
+    test "create_movie_genres/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Films.create_movie_genres(@invalid_attrs)
+    end
+
+    test "update_movie_genres/2 with valid data updates the movie_genres" do
+      movie_genres = movie_genres_fixture()
+      assert {:ok, %MovieGenres{} = movie_genres} = Films.update_movie_genres(movie_genres, @update_attrs)
+    end
+
+    test "update_movie_genres/2 with invalid data returns error changeset" do
+      movie_genres = movie_genres_fixture()
+      assert {:error, %Ecto.Changeset{}} = Films.update_movie_genres(movie_genres, @invalid_attrs)
+      assert movie_genres == Films.get_movie_genres!(movie_genres.id)
+    end
+
+    test "delete_movie_genres/1 deletes the movie_genres" do
+      movie_genres = movie_genres_fixture()
+      assert {:ok, %MovieGenres{}} = Films.delete_movie_genres(movie_genres)
+      assert_raise Ecto.NoResultsError, fn -> Films.get_movie_genres!(movie_genres.id) end
+    end
+
+    test "change_movie_genres/1 returns a movie_genres changeset" do
+      movie_genres = movie_genres_fixture()
+      assert %Ecto.Changeset{} = Films.change_movie_genres(movie_genres)
+    end
+  end
 end

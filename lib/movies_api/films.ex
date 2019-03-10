@@ -485,4 +485,100 @@ defmodule MoviesApi.Films do
   def change_film_languages(%FilmLanguages{} = film_languages) do
     FilmLanguages.changeset(film_languages, %{})
   end
+
+  alias MoviesApi.Films.MovieGenres
+
+  @doc """
+  Returns the list of movie_genres.
+
+  ## Examples
+
+      iex> list_movie_genres()
+      [%MovieGenres{}, ...]
+
+  """
+  def list_movie_genres do
+    Repo.all(MovieGenres)
+  end
+
+  @doc """
+  Gets a single movie_genres.
+
+  Raises `Ecto.NoResultsError` if the Movie genres does not exist.
+
+  ## Examples
+
+      iex> get_movie_genres!(123)
+      %MovieGenres{}
+
+      iex> get_movie_genres!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_movie_genres!(id), do: Repo.get!(MovieGenres, id)
+
+  @doc """
+  Creates a movie_genres.
+
+  ## Examples
+
+      iex> create_movie_genres(%{field: value})
+      {:ok, %MovieGenres{}}
+
+      iex> create_movie_genres(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_movie_genres(attrs \\ %{}) do
+    %MovieGenres{}
+    |> MovieGenres.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a movie_genres.
+
+  ## Examples
+
+      iex> update_movie_genres(movie_genres, %{field: new_value})
+      {:ok, %MovieGenres{}}
+
+      iex> update_movie_genres(movie_genres, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_movie_genres(%MovieGenres{} = movie_genres, attrs) do
+    movie_genres
+    |> MovieGenres.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a MovieGenres.
+
+  ## Examples
+
+      iex> delete_movie_genres(movie_genres)
+      {:ok, %MovieGenres{}}
+
+      iex> delete_movie_genres(movie_genres)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_movie_genres(%MovieGenres{} = movie_genres) do
+    Repo.delete(movie_genres)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking movie_genres changes.
+
+  ## Examples
+
+      iex> change_movie_genres(movie_genres)
+      %Ecto.Changeset{source: %MovieGenres{}}
+
+  """
+  def change_movie_genres(%MovieGenres{} = movie_genres) do
+    MovieGenres.changeset(movie_genres, %{})
+  end
 end
