@@ -23,5 +23,6 @@ defmodule MoviesApiWeb.Router do
     get "/user", UserController, :show
     resources "/ratings", RatingController
     resources "/languages", LanguageController
+    resources "/genres", GenreController
   end
 end
