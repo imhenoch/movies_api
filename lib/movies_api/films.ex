@@ -389,4 +389,100 @@ defmodule MoviesApi.Films do
   def change_movie(%Movie{} = movie) do
     Movie.changeset(movie, %{})
   end
+
+  alias MoviesApi.Films.FilmLanguages
+
+  @doc """
+  Returns the list of film_languages.
+
+  ## Examples
+
+      iex> list_film_languages()
+      [%FilmLanguages{}, ...]
+
+  """
+  def list_film_languages do
+    Repo.all(FilmLanguages)
+  end
+
+  @doc """
+  Gets a single film_languages.
+
+  Raises `Ecto.NoResultsError` if the Film languages does not exist.
+
+  ## Examples
+
+      iex> get_film_languages!(123)
+      %FilmLanguages{}
+
+      iex> get_film_languages!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_film_languages!(id), do: Repo.get!(FilmLanguages, id)
+
+  @doc """
+  Creates a film_languages.
+
+  ## Examples
+
+      iex> create_film_languages(%{field: value})
+      {:ok, %FilmLanguages{}}
+
+      iex> create_film_languages(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_film_languages(attrs \\ %{}) do
+    %FilmLanguages{}
+    |> FilmLanguages.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a film_languages.
+
+  ## Examples
+
+      iex> update_film_languages(film_languages, %{field: new_value})
+      {:ok, %FilmLanguages{}}
+
+      iex> update_film_languages(film_languages, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_film_languages(%FilmLanguages{} = film_languages, attrs) do
+    film_languages
+    |> FilmLanguages.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a FilmLanguages.
+
+  ## Examples
+
+      iex> delete_film_languages(film_languages)
+      {:ok, %FilmLanguages{}}
+
+      iex> delete_film_languages(film_languages)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_film_languages(%FilmLanguages{} = film_languages) do
+    Repo.delete(film_languages)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking film_languages changes.
+
+  ## Examples
+
+      iex> change_film_languages(film_languages)
+      %Ecto.Changeset{source: %FilmLanguages{}}
+
+  """
+  def change_film_languages(%FilmLanguages{} = film_languages) do
+    FilmLanguages.changeset(film_languages, %{})
+  end
 end

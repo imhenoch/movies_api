@@ -240,4 +240,61 @@ defmodule MoviesApi.FilmsTest do
       assert %Ecto.Changeset{} = Films.change_movie(movie)
     end
   end
+
+  describe "film_languages" do
+    alias MoviesApi.Films.FilmLanguages
+
+    @valid_attrs %{}
+    @update_attrs %{}
+    @invalid_attrs %{}
+
+    def film_languages_fixture(attrs \\ %{}) do
+      {:ok, film_languages} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Films.create_film_languages()
+
+      film_languages
+    end
+
+    test "list_film_languages/0 returns all film_languages" do
+      film_languages = film_languages_fixture()
+      assert Films.list_film_languages() == [film_languages]
+    end
+
+    test "get_film_languages!/1 returns the film_languages with given id" do
+      film_languages = film_languages_fixture()
+      assert Films.get_film_languages!(film_languages.id) == film_languages
+    end
+
+    test "create_film_languages/1 with valid data creates a film_languages" do
+      assert {:ok, %FilmLanguages{} = film_languages} = Films.create_film_languages(@valid_attrs)
+    end
+
+    test "create_film_languages/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Films.create_film_languages(@invalid_attrs)
+    end
+
+    test "update_film_languages/2 with valid data updates the film_languages" do
+      film_languages = film_languages_fixture()
+      assert {:ok, %FilmLanguages{} = film_languages} = Films.update_film_languages(film_languages, @update_attrs)
+    end
+
+    test "update_film_languages/2 with invalid data returns error changeset" do
+      film_languages = film_languages_fixture()
+      assert {:error, %Ecto.Changeset{}} = Films.update_film_languages(film_languages, @invalid_attrs)
+      assert film_languages == Films.get_film_languages!(film_languages.id)
+    end
+
+    test "delete_film_languages/1 deletes the film_languages" do
+      film_languages = film_languages_fixture()
+      assert {:ok, %FilmLanguages{}} = Films.delete_film_languages(film_languages)
+      assert_raise Ecto.NoResultsError, fn -> Films.get_film_languages!(film_languages.id) end
+    end
+
+    test "change_film_languages/1 returns a film_languages changeset" do
+      film_languages = film_languages_fixture()
+      assert %Ecto.Changeset{} = Films.change_film_languages(film_languages)
+    end
+  end
 end
