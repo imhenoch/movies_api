@@ -8,6 +8,6 @@ defmodule MoviesApiWeb.Router do
   scope "/api/v1", MoviesApiWeb do
     pipe_through :api
 
-    post "/users", UserController, :create
+    post "/sign_up", UserController, :create
   end
 end
