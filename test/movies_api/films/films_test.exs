@@ -61,4 +61,63 @@ defmodule MoviesApi.FilmsTest do
       assert %Ecto.Changeset{} = Films.change_rating(rating)
     end
   end
+
+  describe "languages" do
+    alias MoviesApi.Films.Language
+
+    @valid_attrs %{language: "some language"}
+    @update_attrs %{language: "some updated language"}
+    @invalid_attrs %{language: nil}
+
+    def language_fixture(attrs \\ %{}) do
+      {:ok, language} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Films.create_language()
+
+      language
+    end
+
+    test "list_languages/0 returns all languages" do
+      language = language_fixture()
+      assert Films.list_languages() == [language]
+    end
+
+    test "get_language!/1 returns the language with given id" do
+      language = language_fixture()
+      assert Films.get_language!(language.id) == language
+    end
+
+    test "create_language/1 with valid data creates a language" do
+      assert {:ok, %Language{} = language} = Films.create_language(@valid_attrs)
+      assert language.language == "some language"
+    end
+
+    test "create_language/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Films.create_language(@invalid_attrs)
+    end
+
+    test "update_language/2 with valid data updates the language" do
+      language = language_fixture()
+      assert {:ok, %Language{} = language} = Films.update_language(language, @update_attrs)
+      assert language.language == "some updated language"
+    end
+
+    test "update_language/2 with invalid data returns error changeset" do
+      language = language_fixture()
+      assert {:error, %Ecto.Changeset{}} = Films.update_language(language, @invalid_attrs)
+      assert language == Films.get_language!(language.id)
+    end
+
+    test "delete_language/1 deletes the language" do
+      language = language_fixture()
+      assert {:ok, %Language{}} = Films.delete_language(language)
+      assert_raise Ecto.NoResultsError, fn -> Films.get_language!(language.id) end
+    end
+
+    test "change_language/1 returns a language changeset" do
+      language = language_fixture()
+      assert %Ecto.Changeset{} = Films.change_language(language)
+    end
+  end
 end

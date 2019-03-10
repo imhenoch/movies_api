@@ -21,6 +21,7 @@ defmodule MoviesApiWeb.Router do
     pipe_through [:api, :jwt_authenticated]
 
     get "/user", UserController, :show
-    resources "/rating", RatingController
+    resources "/ratings", RatingController
+    resources "/languages", LanguageController
   end
 end
