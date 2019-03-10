@@ -5,7 +5,9 @@ defmodule MoviesApiWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", MoviesApiWeb do
+  scope "/api/v1", MoviesApiWeb do
     pipe_through :api
+
+    resources "/users", UserController, only: [:create, :show]
   end
 end
