@@ -8,6 +8,12 @@ use Mix.Config
 # with webpack to recompile .js and .css sources.
 config :movies_api, MoviesApiWeb.Endpoint,
   http: [port: 4000],
+  https: [
+    port: 4443,
+    otp_app: :phoenix_oauth2_mock_server,
+    keyfile: "priv/keys/localhost.key",
+    certfile: "priv/keys/localhost.cert"
+  ],
   debug_errors: false,
   code_reloader: true,
   check_origin: false,
@@ -50,7 +56,7 @@ config :phoenix, :plug_init_mode, :runtime
 # Configure your database
 config :movies_api, MoviesApi.Repo,
   username: "postgres",
-  password: "",
+  password: "pass",
   database: "movies_api_dev",
   hostname: "localhost",
   pool_size: 10
